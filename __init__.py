@@ -4,27 +4,9 @@
 # the code from the PFP (mostfly from hyperlink.py and utilities.py)
 # is mostly from L54-323 and the icon.
 # the function setupEditorButtonsFilter is taken from "Auto Markdown"
-# from https://ankiweb.net/shared/info/1030875226 which was 
-# released anonymously on 2018-11-01
-
-
-##This is the original comment from the file hyperlink.py from PFP:
-    # Copyright 2014-2017 Stefan van den Akker <neftas@protonmail.com>
-    #
-    # This file is part of Power Format Pack.
-    #
-    # Power Format Pack is free software: you can redistribute it
-    # and/or modify it under the terms of the GNU General Public License as
-    # published by the Free Software Foundation, either version 3 of the
-    # License, or (at your option) any later version.
-    #
-    # Power Format Pack is distributed in the hope that it will be
-    # useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
-    # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
-    # Public License for more details.
-    #
-    # You should have received a copy of the GNU General Public License along
-    # with Power Format Pack. If not, see http://www.gnu.org/licenses/.
+# from https://ankiweb.net/shared/info/1030875226 which should be
+# Copyright 2018 anonymous
+#      probably reddit user /u/NavyTeal, see https://www.reddit.com/r/Anki/comments/9t7acy/bringing_markdown_to_anki_21/
 
 
 import json
