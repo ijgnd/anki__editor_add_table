@@ -1,0 +1,6 @@
+{
+    "shortcut_insert_table": "Ctrl+0",
+    "STYLE_TABLE" : true,
+    "table_max_cols":10,
+    "table_max_rows":100
+}
