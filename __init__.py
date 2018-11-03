@@ -1,8 +1,8 @@
 # this is a small modification of the hyperlink/unlink function
 # from the Power Format Pack: Copyright 2014-2017 Stefan van den Akker <neftas@protonmail.com>
 
-# the code from the PFP (mostfly from hyperlink.py and utilities.py)
-# is mostly from L54-323 and the icon.
+# the code from the PFP (mostfly from table.py and utilities.py)
+# is mostly the icon and from L54-323.
 # the function setupEditorButtonsFilter is taken from "Auto Markdown"
 # from https://ankiweb.net/shared/info/1030875226 which should be
 # Copyright 2018 anonymous
