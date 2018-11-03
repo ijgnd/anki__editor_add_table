@@ -1,4 +1,4 @@
-# this is a small modification of the hyperlink/unlink function
+# this is a small modification of the table function
 # from the Power Format Pack: Copyright 2014-2017 Stefan van den Akker <neftas@protonmail.com>
 
 # the code from the PFP (mostfly from table.py and utilities.py)
@@ -317,7 +317,7 @@ def setupEditorButtonsFilter(buttons, editor):
             os.path.join(addon_path, "icons", "table.png"), 
             "tablebutton", 
             toggle_table, 
-            tip="Insert Hyperlink ({})".format(keyStr),
+            tip="Insert table ({})".format(keyStr),
             keys=config['shortcut_insert_table']) 
         buttons.append(b)
 
