@@ -1,4 +1,4 @@
-Tnis is a partial fork of the add-on add-on [Power Format Pack](https://ankiweb.net/shared/info/162313389) (Copyright 2014-2017 Stefan van den Akker &lt;neftas@protonmail.com&gt;) because it won't be ported to 2.1 (as of 2018-11). I just extracted the table function into a standalone version for 2.1. I made only a few small changes. Hackish but works so far. Use it at your own risk.
+Tnis is a partial fork of the add-on add-on [Power Format Pack](https://ankiweb.net/shared/info/162313389) (Copyright 2014-2017 Stefan van den Akker) because it won't be ported to 2.1 (as of 2018-11). I just extracted the table function into a standalone version for 2.1. I made only a few small changes. Hackish but works so far. Use it at your own risk.
 
 For an explanation see the original description at [Power Format Pack](https://ankiweb.net/shared/info/162313389).
 
