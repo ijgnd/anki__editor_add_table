@@ -28,12 +28,12 @@ addon_path = os.path.dirname(__file__)
 def load_config(conf):
     global config
     config=conf
-    config['dstyle'] = config["default_table_style"]
-    config["table_style_align"] = config["table_style_align_default"]
-    config["table_style_first_row_is_header"]  = config["table_style_first_row_is_header_default"]
-    config["table_style_column_width_fixed"] = config["table_style_column_width_fixed_default"]
-    config["columnSpinBox_value"] = config["columnSpinBox_default_value"]
-    config["rowSpinBox_value"] = config["rowSpinBox_default_value"]
+    config['dstyle'] = config["table_style__default"]
+    config["table_style_align"] = config["table_style__align_default"]
+    config["table_style_first_row_is_header"]  = config["table_style__first_row_is_header_default"]
+    config["table_style_column_width_fixed"] = config["table_style__column_width_fixed_default"]
+    config["columnSpinBox_value"] = config["SpinBox_column_default_value"]
+    config["rowSpinBox_value"] = config["SpinBox_row_default_value"]
 
 load_config(mw.addonManager.getConfig(__name__))
 mw.addonManager.setConfigUpdatedAction(__name__,load_config) 
@@ -122,8 +122,8 @@ class Table(object):
         if self.selected_text:
             styling = config['dstyle']
             self.TABLE_STYLING = config['table_style_css'][styling]['TABLE_STYLING']
-            self.HEAD_STYLING  = config['table_style_css'][styling]['HEAD_STYLING_REST']
-            self.BODY_STYLING  = config['table_style_css'][styling]['BODY_STYLING_REST']
+            self.HEAD_STYLING  = config['table_style_css'][styling]['HEAD_STYLING']
+            self.BODY_STYLING  = config['table_style_css'][styling]['BODY_STYLING']
             is_table_created = self.create_table_from_selection()
             # if we could not make a table out of the selected text, present
             # user with dialog, otherwise do nothing
@@ -141,7 +141,7 @@ class Table(object):
 
         columnSpinBox = QSpinBox(dialog)
         columnSpinBox.setMinimum(1)
-        columnSpinBox.setMaximum(config['table_max_cols'])
+        columnSpinBox.setMaximum(config['Table_max_cols'])
         columnSpinBox.setValue(config["columnSpinBox_value"])
         columnLabel = QLabel("Number of columns:")
         #in QFormlayout I can't top align the labels - maybe https://stackoverflow.com/a/34656712
@@ -150,7 +150,7 @@ class Table(object):
 
         rowSpinBox = QSpinBox(dialog)
         rowSpinBox.setMinimum(1)
-        rowSpinBox.setMaximum(config["table_max_rows"])
+        rowSpinBox.setMaximum(config["Table_max_rows"])
         rowSpinBox.setValue(config["rowSpinBox_value"])
         rowLabel = QLabel("Number of rows:")
         form.addRow(rowLabel, rowSpinBox)
@@ -344,7 +344,7 @@ class Table(object):
             body_html = u"<td {0}>{1}</td>"
             for elem, alignment in zip(row, alignments):
                 body_rows += body_html.format(
-                        self.BODY_STYLING.format(alignment), elem)
+                        self.BODY_STYLING.format(alignment,width), elem)
             # if particular row is not up to par with number of cols
             extra_cols = ""
             if len(row) < max_num_cols:
@@ -354,7 +354,7 @@ class Table(object):
                 # use the correct alignment for the last few rows
                 for alignment in alignments[diff:]:
                     extra_cols += body_html.format(
-                            self.BODY_STYLING.format(alignment), u"")
+                            self.BODY_STYLING.format(alignment,width), u"")
             body_rows += extra_cols + u"</tr>"
 
         html = u"""
@@ -388,16 +388,16 @@ def setupEditorButtonsFilter(buttons, editor):
     global editor_instance
     editor_instance = editor
 
-    key = QKeySequence(config['shortcut_insert_table'])
+    key = QKeySequence(config['Key_insert_table'])
     keyStr = key.toString(QKeySequence.NativeText)
 
-    if config['shortcut_insert_table']:
+    if config['Key_insert_table']:
         b = editor.addButton(
             os.path.join(addon_path, "icons", "table.png"), 
             "tablebutton", 
             toggle_table, 
             tip="Insert table ({})".format(keyStr),
-            keys=config['shortcut_insert_table']) 
+            keys=config['Key_insert_table']) 
         buttons.append(b)
 
     return buttons
