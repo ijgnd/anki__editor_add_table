@@ -1,13 +1,13 @@
-# this is a small modification of the table function
-# from the Power Format Pack: Copyright 2014-2017 Stefan van den Akker <neftas@protonmail.com>
-
-# the code from the PFP (mostfly from table.py and utilities.py)
-# is mostly the icon and from L54-323.
-# the function setupEditorButtonsFilter is taken from "Auto Markdown"
-# from https://ankiweb.net/shared/info/1030875226 which should be
-# Copyright 2018 anonymous
-#      probably reddit user /u/NavyTeal, see https://www.reddit.com/r/Anki/comments/9t7acy/bringing_markdown_to_anki_21/
-
+# - Licensed under the GNU AGPLv3.
+# - this is a modification and extension of the table function from the
+#   Power Format Pack: Copyright 2014-2017 Stefan van den 
+#   Akker <neftas@protonmail.com>
+# - the function setupEditorButtonsFilter is taken from "Auto Markdown"
+#   from https://ankiweb.net/shared/info/1030875226 which should be
+#   Copyright 2018 anonymous
+#      maybe reddit user /u/NavyTeal, see https://www.reddit.com/r/Anki/comments/9t7acy/bringing_markdown_to_anki_21/
+# - the styling "less ugly" is from the add-on add "tables with less ugly tables"
+#    which is Copyright 2018 Glutanimate - https://glutanimate.com/
 
 import json
 import os
@@ -28,9 +28,16 @@ addon_path = os.path.dirname(__file__)
 def load_config(conf):
     global config
     config=conf
+    config['dstyle'] = config["default_table_style"]
+    config["table_style_align"] = config["table_style_align_default"]
+    config["table_style_first_row_is_header"]  = config["table_style_first_row_is_header_default"]
+    config["table_style_column_width_fixed"] = config["table_style_column_width_fixed_default"]
+    config["columnSpinBox_value"] = config["columnSpinBox_default_value"]
+    config["rowSpinBox_value"] = config["rowSpinBox_default_value"]
 
 load_config(mw.addonManager.getConfig(__name__))
 mw.addonManager.setConfigUpdatedAction(__name__,load_config) 
+
 
 
 def get_alignment(s):
@@ -104,19 +111,6 @@ class Table(object):
         self.editor_instance    = other
         self.parent_window      = parent_window
         self.selected_text      = selected_text
-
-        if config["STYLE_TABLE"]:
-            self.TABLE_STYLING = \
-                u"style='font-size: 1em; width: 100%; border-collapse: collapse;'"
-            self.HEAD_STYLING = \
-                u"align=\"{0}\" style=\"width: {1}%; padding: 5px;" \
-                + u"border-bottom: 2px solid #00B3FF\""
-            self.BODY_STYLING = \
-                u"style='text-align: {0}; padding: 5px;" \
-                + u"border-bottom: 1px solid #B0B0B0'"
-        else:
-            self.TABLE_STYLING = self.HEAD_STYLING = self.BODY_STYLING = u""
-
         self.setup()
 
     def setup(self):
@@ -126,6 +120,10 @@ class Table(object):
 
         # if the user has selected text, try to make a table out of it
         if self.selected_text:
+            styling = config['dstyle']
+            self.TABLE_STYLING = config['table_style_css'][styling]['TABLE_STYLING']
+            self.HEAD_STYLING  = config['table_style_css'][styling]['HEAD_STYLING_REST']
+            self.BODY_STYLING  = config['table_style_css'][styling]['BODY_STYLING_REST']
             is_table_created = self.create_table_from_selection()
             # if we could not make a table out of the selected text, present
             # user with dialog, otherwise do nothing
@@ -134,23 +132,68 @@ class Table(object):
 
         dialog = QDialog(self.parent_window)
         dialog.setWindowTitle("table")
+        dialog.setStyleSheet(""" QCheckBox { padding-top: 7%; }  
+                                 QLabel    { padding-top: 7%; }  """)  #height: 10px; margin: 0px; }")
 
         form = QFormLayout()
-        form.addRow(QLabel("Enter the number of columns and rows"))
+        form.addRow(QLabel("Enter table properties"))
+
 
         columnSpinBox = QSpinBox(dialog)
         columnSpinBox.setMinimum(1)
         columnSpinBox.setMaximum(config['table_max_cols'])
-        columnSpinBox.setValue(2)
+        columnSpinBox.setValue(config["columnSpinBox_value"])
         columnLabel = QLabel("Number of columns:")
+        #in QFormlayout I can't top align the labels - maybe https://stackoverflow.com/a/34656712
+        #columnLabel.setAlignment(Qt.AlignTop)
         form.addRow(columnLabel, columnSpinBox)
 
         rowSpinBox = QSpinBox(dialog)
         rowSpinBox.setMinimum(1)
         rowSpinBox.setMaximum(config["table_max_rows"])
-        rowSpinBox.setValue(3)
+        rowSpinBox.setValue(config["rowSpinBox_value"])
         rowLabel = QLabel("Number of rows:")
         form.addRow(rowLabel, rowSpinBox)
+
+        cwidth = QCheckBox()
+        cwidth.setText("")
+        if config["table_style_column_width_fixed"] :
+            cwidth.setChecked(True)
+        cwidthLabel = QLabel("Fixed Width columns:")
+        form.addRow(cwidthLabel, cwidth)
+
+        frheader = QCheckBox()
+        frheader.setText("")
+        if config["table_style_first_row_is_header"] :
+            frheader.setChecked(True)
+        frheaderLabel = QLabel("first row is header:")
+        form.addRow(frheaderLabel, frheader)
+
+        styleComboBox = QComboBox(dialog)
+        members = [config['dstyle'],]
+        for s in config['table_style_css'].keys():
+            if s != config['dstyle']: 
+                members.append(s)
+        styleComboBox.addItems(members)
+        styleLabel = QLabel("styling:")
+        form.addRow(styleLabel, styleComboBox)
+
+        table_align = QComboBox(dialog)
+        options = ['left','right','center',""]
+        rest = [item for item in options if item != config["table_style_align"]]
+        members = [config["table_style_align"]]
+        for i in rest:
+            members.append(i)
+        table_align.addItems(members)
+        table_align_label = QLabel("Table alignment (if existing):")
+        form.addRow(table_align_label, table_align)
+
+        useasdefault = QCheckBox()
+        useasdefault.setText("")
+        if config["last_used_overrides_default"] :
+            useasdefault.setChecked(True)
+        useasdefaultLabel = QLabel("Save these settings as\ndefault for next table:")
+        form.addRow(useasdefaultLabel, useasdefault)
 
         buttonBox = QDialogButtonBox(QDialogButtonBox.Ok |
                                            QDialogButtonBox.Cancel,
@@ -166,34 +209,70 @@ class Table(object):
 
         if dialog.exec_() == QDialog.Accepted:
 
+            styling = styleComboBox.currentText()
+            useheader = True if frheader.isChecked() else False
+            fixedcolumnwidth = True if cwidth.isChecked() else False
+            table_align = table_align.currentText()
+
+            config['last_used_overrides_default'] =  True if useasdefault.isChecked() else False
+
+            if config['last_used_overrides_default']:
+                config['dstyle'] = styling
+                config["table_style_align"] = table_align
+                config["table_style_first_row_is_header"] = useheader
+                config["table_style_column_width_fixed"] = fixedcolumnwidth
+                config["columnSpinBox_value"] = columnSpinBox.value()
+                config["rowSpinBox_value"] = rowSpinBox.value()
+
             num_columns = columnSpinBox.value()
-            num_rows = rowSpinBox.value() - 1
+            if useheader:
+                num_rows = rowSpinBox.value() - 1
+            else:
+                num_rows = rowSpinBox.value()
+
+            self.TABLE_STYLING = config['table_style_css'][styling]['TABLE_STYLING']
+            self.HEAD_STYLING  = config['table_style_css'][styling]['HEAD_STYLING']
+            self.BODY_STYLING  = config['table_style_css'][styling]['BODY_STYLING']
 
             num_header = create_counter(start=1, step=1)
             num_data = create_counter(start=1, step=1)
 
+
             # set width of each column equal
-            width = 100 / num_columns
+            if fixedcolumnwidth:
+                width = 100 / num_columns
+            else:
+                width = ""
 
             header_html = u"<th {0}>header{1}</th>"
-            header_column = "".join(header_html.format(
-                self.HEAD_STYLING.format("left", width), next(num_header))
-                for _ in range(num_columns))
+            if useheader:
+                header_column = "".join(header_html.format(
+                    self.HEAD_STYLING.format(table_align, width), next(num_header))
+                    for _ in range(num_columns))
             body_html = u"<td {0}>data{1}</td>"
             body_column = "".join(body_html.format(
-                self.BODY_STYLING.format(width), next(num_data))
+                self.BODY_STYLING.format(table_align,width), next(num_data))
                 for _ in range(num_columns))
             body_row = "<tr>{}</tr>".format(body_column) * num_rows
 
-            html = u"""
-            <table {0}>
-                <thead><tr>{1}</tr></thead>
-                <tbody>{2}</tbody>
-            </table>""".format(self.TABLE_STYLING, header_column, body_row)
+            if useheader:
+                html = u"""
+                <table {0}>
+                    <thead><tr>{1}</tr></thead>
+                    <tbody>{2}</tbody>
+                </table>""".format(self.TABLE_STYLING, header_column, body_row)
+            else:
+                html = u"""
+                <table {0}>
+                    <tbody>{1}</tbody>
+                </table>""".format(self.TABLE_STYLING, body_row)
 
             self.editor_instance.web.eval(
                     "document.execCommand('insertHTML', false, %s);"
                     % json.dumps(html))
+
+
+
 
     def create_table_from_selection(self):
         """

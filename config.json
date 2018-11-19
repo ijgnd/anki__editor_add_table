@@ -1,6 +1,39 @@
 {
     "shortcut_insert_table": "Ctrl+0",
-    "STYLE_TABLE" : true,
     "table_max_cols":10,
-    "table_max_rows":100
+    "table_max_rows":100,
+    "default_table_style": "less ugly",
+    "columnSpinBox_default_value": 2,
+    "rowSpinBox_default_value":3,
+    "last_used_overrides_default": true,
+    "table_style_first_row_is_header_default": true,
+    "table_style_column_width_fixed_default": true,
+    "table_style_align_default": "left",
+    "table_style_css":{
+        "pfp - style":{
+            "TABLE_STYLING": " style='font-size: 95%; width: 100%; border-collapse: collapse;' ",
+            "HEAD_STYLING" : " align='{0}' style='width: {1}%; padding: 5px; border-bottom: 2px solid #00B3FF' ",
+            "BODY_STYLING" : " align='{0}' style='width: {1}%; padding: 5px; border-bottom: 1px solid #B0B0B0' "
+        },
+        "unstyled":{
+            "TABLE_STYLING": "",
+            "HEAD_STYLING" : "",
+            "BODY_STYLING" : ""
+        },
+        "less ugly":{
+            "TABLE_STYLING": " style='font-size: 85%; width: 100%; border-collapse: collapse;' border='1' ",
+            "HEAD_STYLING":  " align='{0}' style='width: {1}%; padding: 2px;' ",
+            "BODY_STYLING":  " align='{0}' style='width: {1}%; padding: 2px;' "
+        },
+        "css1":{
+            "TABLE_STYLING": " class='table_class_one' ",
+            "HEAD_STYLING":  "",
+            "BODY_STYLING":  ""
+        },
+        "css2":{
+            "TABLE_STYLING": " class='table_class_two' ",
+            "HEAD_STYLING":  "",
+            "BODY_STYLING":  ""
+        }
+    }
 }
