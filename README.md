@@ -1,1 +1,1 @@
-for a description see https://ankiweb.net/shared/upload?id=1237621971
+for a description see https://ankiweb.net/shared/info/1237621971
