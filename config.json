@@ -27,9 +27,9 @@
             "HEAD_STYLING": " align='{0}' style='width: {1}%; padding: 2px;' ",
             "TABLE_STYLING": " style='font-size: 85%; width: 100%; border-collapse: collapse;' border='1' "
         },
-        "less ugly - no outside border": {
-            "BODY_STYLING": " align='{0}' style='width: {1}%; padding: 2px; border: 1px solid black;' ",
-            "HEAD_STYLING": " align='{0}' style='width: {1}%; padding: 2px; border: 2px solid black;' ",
+        "no outside border": {
+            "BODY_STYLING": " align='{0}' style='width: {1}%; padding: 2px; border: 1px solid #999999' ",
+            "HEAD_STYLING": " align='{0}' style='width: {1}%; padding: 2px; border: 1px solid #999999' ",
             "TABLE_STYLING": " style='font-size: 85%; width: 100%; border-style: hidden; border-collapse: collapse;' "
         },
         "pfp - style": {
