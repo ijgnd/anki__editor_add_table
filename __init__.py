@@ -244,12 +244,19 @@ class Table(object):
             else:
                 width = ""
 
-            header_html = u"<th {0}>header{1}</th>"
+            if config["table_pre-populate_header_fields"]:
+                header_html = u"<th {0}>header{1}</th>"
+            else:
+                header_html = u"<th {0}>&#x200b;</th>"
             if useheader:
                 header_column = "".join(header_html.format(
                     self.HEAD_STYLING.format(table_align, width), next(num_header))
                     for _ in range(num_columns))
-            body_html = u"<td {0}>data{1}</td>"
+
+            if config["table_pre-populate_body_fields"]:
+                body_html = u"<td {0}>data{1}</td>"
+            else:
+                body_html = u"<td {0}>&#x200b;</td>"
             body_column = "".join(body_html.format(
                 self.BODY_STYLING.format(table_align,width), next(num_data))
                 for _ in range(num_columns))

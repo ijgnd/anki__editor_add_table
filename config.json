@@ -1,12 +1,16 @@
 {
+    "Key_insert_table": "Ctrl+0",
     "SpinBox_column_default_value": 2,
     "SpinBox_row_default_value": 3,
-    "Key_insert_table": "Ctrl+0",
-    "last_used_overrides_default": true,
     "Table_max_cols": 10,
     "Table_max_rows": 100,
+    "last_used_overrides_default": true,
+    "table_pre-populate_header_fields":true,
+    "table_pre-populate_body_fields":true,
     "table_style__align_default": "left",
     "table_style__column_width_fixed_default": true,
+    "table_style__default": "less ugly",
+    "table_style__first_row_is_header_default": true,
     "table_style_css": {
         "css1": {
             "BODY_STYLING": "",
@@ -33,7 +37,5 @@
             "HEAD_STYLING": "",
             "TABLE_STYLING": ""
         }
-    },
-    "table_style__default": "less ugly",
-    "table_style__first_row_is_header_default": true
+    }
 }
