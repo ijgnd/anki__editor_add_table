@@ -1,0 +1,51 @@
+{
+    "Key_insert_table": "Ctrl+0",
+    "SpinBox_column_default_value": 2,
+    "SpinBox_row_default_value": 3,
+    "Table_max_cols": 10,
+    "Table_max_rows": 100,
+    "last_used_overrides_default": true,
+    "table_pre-populate_header_fields":true,
+    "table_pre-populate_body_fields":true,
+    "table_style__align_default": "left",
+    "table_style__column_width_fixed_default": true,
+    "table_style__default": "less ugly - minimal width",
+    "table_style__first_row_is_header_default": true,
+    "table_style_css": {
+        "css1": {
+            "BODY_STYLING": "",
+            "HEAD_STYLING": "",
+            "TABLE_STYLING": " class='table_class_one' "
+        },
+        "css2": {
+            "BODY_STYLING": "",
+            "HEAD_STYLING": "",
+            "TABLE_STYLING": " class='table_class_two' "
+        },
+        "less ugly - full width": {
+            "BODY_STYLING": " align='{0}' style='width: {1}%; padding: 2px;' ",
+            "HEAD_STYLING": " align='{0}' style='width: {1}%; padding: 2px;' ",
+            "TABLE_STYLING": " style='font-size: 85%; width: 100%; border-collapse: collapse;' border='1' "
+        },
+        "less ugly - minimal width": {
+            "BODY_STYLING": " align='{0}' style='padding: 2px;' ",
+            "HEAD_STYLING": " align='{0}' style='padding: 2px;' ",
+            "TABLE_STYLING": " style='font-size: 85%; border-collapse: collapse;' border='1' "
+        },
+        "no outside border": {
+            "BODY_STYLING": " align='{0}' style='width: {1}%; padding: 2px; border: 1px solid #999999' ",
+            "HEAD_STYLING": " align='{0}' style='width: {1}%; padding: 2px; border: 1px solid #999999' ",
+            "TABLE_STYLING": " style='font-size: 85%; width: 100%; border-style: hidden; border-collapse: collapse;' "
+        },
+        "pfp - style": {
+            "BODY_STYLING": " align='{0}' style='width: {1}%; padding: 5px; border-bottom: 1px solid #B0B0B0' ",
+            "HEAD_STYLING": " align='{0}' style='width: {1}%; padding: 5px; border-bottom: 2px solid #00B3FF' ",
+            "TABLE_STYLING": " style='font-size: 95%; width: 100%; border-collapse: collapse;' "
+        },
+        "unstyled": {
+            "BODY_STYLING": "",
+            "HEAD_STYLING": "",
+            "TABLE_STYLING": ""
+        }
+    }
+}
