@@ -8,8 +8,8 @@
 #   from https://ankiweb.net/shared/info/1030875226 which should be
 #   Copyright 2018 anonymous
 #      maybe reddit user /u/NavyTeal, see https://www.reddit.com/r/Anki/comments/9t7acy/bringing_markdown_to_anki_21/
-# - the styling "less ugly" is from the add-on add "tables with less ugly tables"
-#    which is Copyright 2018 Glutanimate - https://glutanimate.com/
+# - the styling "less ugly" is from the add-on add "tables with less ugly tables",
+#   https://ankiweb.net/shared/info/1467671504, Copyright 2018 anonymous
 
 import json
 import os
