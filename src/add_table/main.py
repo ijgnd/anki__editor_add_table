@@ -441,9 +441,12 @@ if ANKI21:
         return buttons
     addHook("setupEditorButtons", setupEditorButtonsFilter)
 else:
+    key = QKeySequence(config['Key_insert_table'])
+    keyStr = key.toString(QKeySequence.NativeText)
+    
     from aqt.editor import Editor
     def mySetupButtons(self):
         b = self._addButton("my_pfp_html_table", lambda s=self: toggle_table(self),
-                text=" ", tip="Add Table (Alt+s)", key="Alt+s")
+                text=" ", tip="Insert table ({})".format(keyStr), key=config['Key_insert_table'])
         b.setIcon(QIcon(os.path.join(mw.pm.addonFolder(), 'add_table', 'icons', 'table.png')))
     Editor.setupButtons = wrap(Editor.setupButtons, mySetupButtons)
