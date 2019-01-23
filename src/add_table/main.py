@@ -13,6 +13,7 @@
 
 import json
 import os
+import re
 from anki import version
 from aqt import mw
 from aqt.qt import *
@@ -332,9 +333,8 @@ class Table(object):
 
         # split on pipes
         second = list()
-        DETECT_MD_TABLE = True
         for elem in first[:]:
-            if elem.startswith('|') and elem.endswith('|') and DETECT_MD_TABLE:
+            if elem.startswith('|') and elem.endswith('|'):
                 elem = elem[1:-1]
             new_elem = [x.strip() for x in elem.split(u"|")]
             new_elem = [escape_html_chars(word) for word in new_elem]
@@ -348,7 +348,6 @@ class Table(object):
         width = 100 / max_num_cols
 
         # check for "-|-|-" alignment row
-        import re
         second[1] = [re.sub(r"-+",'-',x) for x in second[1]]
         if all(x.strip(u":") in (u"-", u"") for x in second[1]):
             start = 2
