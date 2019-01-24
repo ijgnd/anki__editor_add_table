@@ -14,6 +14,7 @@
 import json
 import os
 import re
+import uuid
 from anki import version
 from aqt import mw
 from aqt.qt import *
@@ -80,6 +81,12 @@ def get_alignment(s):
     return alignments[s]
 
 
+place_holder_table = {
+    #"strings in source" : ["strings in result", "temporary placeholder"]
+    "\|":["&#124;",str(uuid.uuid4())],
+}
+
+
 def escape_html_chars(s):
     """
     Escape HTML characters in a string. Return a safe string.
@@ -98,8 +105,11 @@ def escape_html_chars(s):
         ">": "&gt;",
         "<": "&lt;",
     }
-
     result = "".join(html_escape_table.get(c, c) for c in s)
+
+    for i in place_holder_table.values():
+        result = result.replace(i[1],i[0])
+
     return result
 
 
@@ -328,8 +338,14 @@ class Table(object):
         if all(c in (u"|", u"\n") for c in self.selected_text):
             return False
 
-        # split on newlines
-        first = [x for x in self.selected_text.split(u"\n") if x]
+        # - split on newlines
+        # - strip to remove leading/trailing spaces: Otherwise the detection of
+        #   markdown tables might not work and a space might generate a new column
+        # - To include a pipe as content escape the backslash (as in GFM spec)
+        stx = self.selected_text
+        for k,v in place_holder_table.items():
+            stx = stx.replace(k,v[1])
+        first = [x.strip() for x in stx.split(u"\n") if x]
 
         # split on pipes
         second = list()
