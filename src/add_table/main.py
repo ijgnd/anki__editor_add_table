@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 
 # - Licensed under the GNU AGPLv3.
 # - this is a modification and extension of the table function from the
@@ -463,6 +464,6 @@ else:
     from aqt.editor import Editor
     def mySetupButtons(self):
         b = self._addButton("my_pfp_html_table", lambda s=self: toggle_table(self),
-                text=" ", tip="Insert table ({})".format(keyStr), key=config['Key_insert_table'])
+                text=" ", tip=u"Insert table ({})".format(keyStr), key=config['Key_insert_table'])
         b.setIcon(QIcon(os.path.join(mw.pm.addonFolder(), 'add_table', 'icons', 'table.png')))
     Editor.setupButtons = wrap(Editor.setupButtons, mySetupButtons)
