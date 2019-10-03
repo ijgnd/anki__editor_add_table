@@ -174,8 +174,6 @@ class TableDialog(QDialog):
                  ['last_used_overrides_default', self.save_as_default],
                  ]
             wcm(newvalues)
-            pp(newvalues)
-            print('~~~~~~~~~~~~~~~~~~')
 
     def accept(self):
         d = self.dialog
