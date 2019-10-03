@@ -136,8 +136,8 @@ class TableDialog(QDialog):
         d.sb_rows.setMaximum(gc("Table_max_rows", 100))
         d.sb_rows.setValue(gc("SpinBox_row_default_value", 5))
         d.cb_width.setChecked(True if gc("table_style__column_width_fixed_default", False) else False)
-        d.cb_first.setChecked(True if gc("table_style__first_row_is_header_default", False) else False)
-        d.cb_prefill.setChecked(True if gc("table_pre-populate_header_fields", False) else False)
+        d.cb_first.setChecked(True if gc("table_style__first_row_is_head_default", False) else False)
+        d.cb_prefill.setChecked(True if gc("table_pre-populate_head_fields", False) else False)
 
         smembers = [gc('table_style__default'), ]
         for s in gc('table_style_css_V2').keys():
@@ -165,8 +165,8 @@ class TableDialog(QDialog):
                  ["SpinBox_column_default_value", self.num_columns],
                  ["SpinBox_row_default_value", self.num_rows],
                  ["table_style__column_width_fixed_default", self.fixedwidth],
-                 ["table_style__first_row_is_header_default", self.useheader],
-                 ["table_pre-populate_header_fields", self.prefill],
+                 ["table_style__first_row_is_head_default", self.usehead],
+                 ["table_pre-populate_head_fields", self.prefill],
                  ["table_pre-populate_body_fields", self.prefill],
                  ["table_style__default", self.styling],
                  ["table_style__h_align_default", self.table_h_align],
@@ -180,7 +180,7 @@ class TableDialog(QDialog):
         self.num_columns = d.sb_columns.value()
         self.num_rows = d.sb_rows.value()
         self.fixedwidth = True if d.cb_width.isChecked() else False
-        self.useheader = True if d.cb_first.isChecked() else False
+        self.usehead = True if d.cb_first.isChecked() else False
         self.prefill = True if d.cb_prefill.isChecked() else False
         self.styling = d.sb_styling.currentText()
         self.table_h_align = d.sb_align_H.currentText()
@@ -217,7 +217,7 @@ class Table():
     def show_dialog(self):
         d = TableDialog(self.parent_window)
         if d.exec():
-            if d.useheader:
+            if d.usehead:
                 num_rows = d.num_rows - 1
             else:
                 num_rows = d.num_rows
@@ -233,14 +233,14 @@ class Table():
             if d.table_v_align:
                 style += ' vertical-align:%s; ' % d.table_v_align
 
-            header_column = ""
-            if d.useheader:
+            head_row = ""
+            if d.usehead:
                 if d.prefill:
-                    header_html = "<th {0}>header{1}</th>"
+                    head_html = "<th {0}>head{1}</th>"
                 else:
-                    header_html = "<th {0}>&#x200b;</th>"
+                    head_html = "<th {0}>&#x200b;</th>"
                 for i in range(d.num_columns):
-                    header_column += header_html.format(Hstyle.format(style), str(i+1))
+                    head_row += head_html.format(Hstyle.format(style), str(i+1))
 
             if d.prefill:
                 body_html = "<td {0}>data{1}</td>"
@@ -250,15 +250,15 @@ class Table():
             for i in range(d.num_columns):
                 body_column += body_html.format(Bstyle.format(style), str(i+1))
             body_rows = "<tr>{}</tr>".format(body_column) * num_rows
-            self.insert_table(Tstyle, header_column, body_rows)
+            self.insert_table(Tstyle, head_row, body_rows)
 
-    def insert_table(self, Tstyle, header_column, body_rows):
-        if header_column:
+    def insert_table(self, Tstyle, head_row, body_rows):
+        if head_row:
             html = """
             <table {0}>
                 <thead><tr>{1}</tr></thead>
                 <tbody>{2}</tbody>
-            </table>""".format(Tstyle, header_column, body_rows)
+            </table>""".format(Tstyle, head_row, body_rows)
         else:
             html = """
             <table {0}>

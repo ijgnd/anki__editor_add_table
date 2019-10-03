@@ -46,7 +46,7 @@
      <item row="4" column="0">
       <widget class="QLabel" name="label_6">
        <property name="text">
-        <string>First row is header</string>
+        <string>First row is head</string>
        </property>
       </widget>
      </item>

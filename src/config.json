@@ -5,13 +5,13 @@
     "Table_max_cols": 10,
     "Table_max_rows": 100,
     "last_used_overrides_default": true,
-    "table_pre-populate_header_fields":true,
+    "table_pre-populate_head_fields":true,
     "table_pre-populate_body_fields":true,
     "table_style__h_align_default": "do not override global settings",
     "table_style__v_align_default": "do not override global settings",
     "table_style__column_width_fixed_default": true,
     "table_style__default": "less ugly - minimal width",
-    "table_style__first_row_is_header_default": true,
+    "table_style__first_row_is_head_default": true,
     "table_style_css_V2": {
         "css1": {
             "BODY_STYLING": "",
