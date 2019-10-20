@@ -1,0 +1,49 @@
+<b>Don't download this add-on for the old Anki version 2.0</b>
+Don't download this add-on for the old Anki version 2.0
+Don't download this add-on for the old Anki version 2.0
+
+<b># About Anki 2.0</b>
+If you want to add tables in the old Anki 2.0 use the function from the add-on  <a href="https://ankiweb.net/shared/info/162313389" rel="nofollow">Power Format Pack</a>. This add-on is still listed as available for Anki 2.0 because you can't unpublish add-ons just for 2.0 and the <a href="https://anki.tenderapp.com/discussions/ankiweb/3982-unpublish-delete-add-on-version-for-20" rel="nofollow">officially recommended way</a> is to just post a message that Anki 2.0 is no longer supported. I removed the version for 2.0 because it set the alignment without using the style attribute. You can still download it <a href="https://github.com/ijgnd/anki__editor_add_table/archive/72e8fca3a64491cf5d8bcad566833e91e835ccd4.zip" rel="nofollow">from github as a zip file</a>. To use it you would have to copy the contents of the src folder in your addon folder.
+
+<b># Update notice</b>
+If you installed before 2019-10-08 and updated and changed the config setting "table_style_css" you must adjust these to the new "table_style_css_V2"
+
+<b># Use</b>
+The shortcut to insert a table and some styling defaults can be configured using the new configuration dialogue of 2.1: Tools&gt;Add-ons, select the add-on and click on "Config".
+
+You can insert a table in two ways:
+1. If you do not select any text, upon clicking the "Create a table button" (or pressing the shortcut) you will be presented with a dialog window asking you to specify some table properties (like number of rows, number of columns, alignment, styling). The dialog to insert tables looks like this: 
+ <img src="https://raw.githubusercontent.com/ijgnd/anki21__PFP_table/master/screenshots/options.png"> 
+2. If you have text selected you can convert a table (in markdown format) into a full html table. 
+<code>header1 | header2</code>
+<code>-|-</code>
+<code>elem1 | elem2</code>
+These will create a list with two columns and two rows. The <code>-|-</code> part is optional, but can be used to align the column to the left (<code>:-</code>), right (<code>-:</code>) or to the center (<code>:-:</code>). You can skip this line completely, but do make sure you add a pipe character | between elements to designate a border. 
+
+Use the add-on at your own risk.
+<img src="https://user-images.githubusercontent.com/40218852/52268806-b13f4100-293c-11e9-8265-21a6b26add23.gif"> 
+<img src="https://user-images.githubusercontent.com/40218852/52268914-f2cfec00-293c-11e9-8508-43d052c1dbab.gif"> 
+
+<b># other relevant add-ons</b>
+For editing tables there's the add-on <a href="https://ankiweb.net/shared/info/805891399" rel="nofollow">extended (table) editor</a>.
+
+If you want to replace the PowerFormatPack in 2.1 you might also be interested in these add-ons: 
+- <a href="https://ankiweb.net/shared/info/295889520" rel="nofollow">Mini Format Pack</a>
+- <a href="https://ankiweb.net/shared/info/1463041493" rel="nofollow">Syntax Highlighting for Code</a>
+- <a href="https://ankiweb.net/shared/info/318752047" rel="nofollow">Add Hyperlink</a>
+- <a href="https://ankiweb.net/shared/info/1030875226" rel="nofollow">Auto Markdown - convert Markdown to HTML</a>
+
+<b># Versions</b>
+- 2019-10-08 2.1 only, gui option for vertical alignment, set alignment in style, code cleanup
+- 2019-02-24 Fix for UnicodeEncodeError in Anki 2.0 by khonkhortisan
+- 2019-01-24 handle leading/trailing pipes and escaped pipes, fix shortcut for 2.0
+- 2018-11-19 additional options in table creation dialog
+- 2018-11-03 initial release
+
+<b># Credits</b>
+This add-on and parts of this description are a partial fork of the great add-on <a href="https://ankiweb.net/shared/info/162313389" rel="nofollow">Power Format Pack</a> (Copyright 2014-2017 Stefan van den Akker) because it won't be ported to 2.1 (as of 2018-11). I extracted the table function into a standalone version for 2.1 and in the latest version made some small additions so that you can better customize the table inserted. All the good stuff in this add-on is from Stefan van den Akker.
+
+The style "less ugly" is incorporated from an anonymously uploaded forked version <a href="https://ankiweb.net/shared/info/1467671504" rel="nofollow">add tables with less ugly tables</a>.
+
+<b># bugs, errors, feedback</b>
+Please do not use reviews for bug reports or support requests. I don't get notified of your reviews, and properly troubleshooting an issue through them is nearly impossible (formatting is limited and I can't reply multiple times). If you find a bug let me know on <a href="https://github.com/ijgnd/anki__editor_add_table/issues" rel="nofollow">github</a> or via reddit (/u/ijgnord).
