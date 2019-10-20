@@ -16,9 +16,10 @@ import uuid
 
 
 from anki import version
+from anki.hooks import addHook, wrap
 from aqt import mw
 from aqt.qt import *
-from anki.hooks import addHook, wrap
+from aqt.editor import Editor
 
 from .forms import addtable
 
@@ -356,6 +357,7 @@ class Table():
 def toggle_table(editor):
     selection = editor.web.selectedText()
     Table(editor, editor.parentWindow, selection if selection else None)
+Editor.toggle_table = toggle_table
 
 
 def setupEditorButtonsFilter(buttons, editor):
