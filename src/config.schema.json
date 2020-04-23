@@ -1,0 +1,91 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "title": "Add Table",
+    "properties": {
+      "Key_insert_table": {
+        "type": "string",
+        "default": "Ctrl+0",
+        "description": ""
+        },
+    "SpinBox_column_default_value": {
+        "type": "integer",
+        "default": 2,
+        "description": ""
+        },
+    "SpinBox_row_default_value": {
+        "type": "integer",
+        "default": 3,
+        "description": ""
+        },
+    "Table_max_cols": {
+        "type": "integer",
+        "default": 10,
+        "description": ""
+        },
+    "Table_max_rows": {
+        "type": "integer",
+        "default": 100,
+        "description": ""
+        },
+    "last_used_overrides_default": {
+        "type": "boolean",
+        "default": true,
+        "description": ""
+    },
+    "table_center_by_default": {
+        "type": "boolean",
+        "default": false,
+        "description": ""
+    },
+    "table_pre-populate_head_fields": {
+        "type": "boolean",
+        "default": true,
+        "description": ""
+    },
+    "table_pre-populate_body_fields": {
+        "type": "boolean",
+        "default": true,
+        "description": ""
+    },
+    "table_style__h_align_default": {
+        "type": "string",
+        "default": "do not override global settings",
+        "description": ""
+        },
+    "table_style__v_align_default": {
+        "type": "string",
+        "default": "do not override global settings",
+        "description": ""
+        },
+    "table_style__column_width_fixed_default": {
+        "type": "boolean",
+        "default": true,
+        "description": ""
+        },
+    "table_style__default": {
+        "type": "string",
+        "default": "less ugly - minimal width",
+        "description": ""
+        },
+    "table_style__first_row_is_head_default": {
+        "type": "boolean",
+        "default": true,
+        "description": ""
+        },
+    "table_style_css_V3": {
+        "type": "object",
+        "description": "",
+        "additionalProperties": { 
+            "type": "object",
+            "properties": {
+                "BODY_STYLING": { "type": "string" },
+                "HEAD_STYLING": { "type": "string" },
+                "TABLE_STYLING": { "type": "string" }
+            },
+            "required": ["BODY_STYLING", "HEAD_STYLING", "TABLE_STYLING"],
+            "additionalProperties": false
+            }
+        }
+    }
+}
