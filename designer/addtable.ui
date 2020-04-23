@@ -16,65 +16,7 @@
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
     <layout class="QGridLayout" name="gridLayout_2">
-     <item row="8" column="0">
-      <widget class="QLabel" name="label_7">
-       <property name="text">
-        <string>Table alignment, vertical</string>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="0">
-      <widget class="QLabel" name="label_4">
-       <property name="text">
-        <string>prefill fields</string>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="0">
-      <widget class="QLabel" name="label_5">
-       <property name="text">
-        <string>Table alignment, horizontal</string>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="label_6">
-       <property name="text">
-        <string>First row is head</string>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="0">
-      <widget class="QLabel" name="label_9">
-       <property name="text">
-        <string>styling</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Enter table properties:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="textFormat">
-        <enum>Qt::RichText</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Number of columns</string>
-       </property>
-      </widget>
-     </item>
-     <item row="9" column="0">
+     <item row="10" column="0">
       <widget class="QLabel" name="label_8">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
@@ -96,10 +38,20 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="label_10">
+     <item row="8" column="1">
+      <widget class="QComboBox" name="sb_align_H"/>
+     </item>
+     <item row="3" column="1">
+      <widget class="QCheckBox" name="cb_width">
        <property name="text">
-        <string>Fixed Width columns</string>
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="1">
+      <widget class="QCheckBox" name="cb_save">
+       <property name="text">
+        <string/>
        </property>
       </widget>
      </item>
@@ -110,23 +62,80 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
-      <widget class="QSpinBox" name="sb_columns"/>
+     <item row="8" column="0">
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>Table alignment, horizontal</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Number of columns</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="1">
+      <widget class="QComboBox" name="sb_styling"/>
+     </item>
+     <item row="9" column="0">
+      <widget class="QLabel" name="label_7">
+       <property name="text">
+        <string>Table alignment, vertical</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
      <item row="2" column="1">
       <widget class="QSpinBox" name="sb_rows"/>
      </item>
-     <item row="3" column="1">
-      <widget class="QCheckBox" name="cb_width">
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
        <property name="text">
-        <string/>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Enter table properties:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::RichText</enum>
        </property>
       </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_10">
+       <property name="text">
+        <string>Fixed Width columns</string>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="1">
+      <widget class="QComboBox" name="sb_align_V"/>
      </item>
      <item row="4" column="1">
       <widget class="QCheckBox" name="cb_first">
        <property name="text">
         <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QSpinBox" name="sb_columns"/>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>prefill fields</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_6">
+       <property name="text">
+        <string>First row is head</string>
        </property>
       </widget>
      </item>
@@ -137,17 +146,22 @@
        </property>
       </widget>
      </item>
+     <item row="7" column="0">
+      <widget class="QLabel" name="label_9">
+       <property name="text">
+        <string>styling</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="label_11">
+       <property name="text">
+        <string>center table</string>
+       </property>
+      </widget>
+     </item>
      <item row="6" column="1">
-      <widget class="QComboBox" name="sb_styling"/>
-     </item>
-     <item row="7" column="1">
-      <widget class="QComboBox" name="sb_align_H"/>
-     </item>
-     <item row="8" column="1">
-      <widget class="QComboBox" name="sb_align_V"/>
-     </item>
-     <item row="9" column="1">
-      <widget class="QCheckBox" name="cb_save">
+      <widget class="QCheckBox" name="cb_center">
        <property name="text">
         <string/>
        </property>

@@ -5,14 +5,15 @@
     "Table_max_cols": 10,
     "Table_max_rows": 100,
     "last_used_overrides_default": true,
-    "table_pre-populate_head_fields":true,
-    "table_pre-populate_body_fields":true,
+    "table_center_by_default": false,
+    "table_pre-populate_head_fields": true,
+    "table_pre-populate_body_fields": true,
     "table_style__h_align_default": "do not override global settings",
     "table_style__v_align_default": "do not override global settings",
     "table_style__column_width_fixed_default": true,
     "table_style__default": "less ugly - minimal width",
     "table_style__first_row_is_head_default": true,
-    "table_style_css_V2": {
+    "table_style_css_V3": {
         "css1": {
             "BODY_STYLING": "",
             "HEAD_STYLING": "",
@@ -24,14 +25,14 @@
             "TABLE_STYLING": " class='table_class_two' "
         },
         "less ugly - full width": {
-            "BODY_STYLING": " style='{0} padding: 2px;' ",
-            "HEAD_STYLING": " style='{0} padding: 2px;' ",
-            "TABLE_STYLING": " style='font-size: 85%; width: 100%; border-collapse: collapse;' border='1' "
+            "BODY_STYLING": " style='{0} padding: 2px; border: 1px solid black;' ",
+            "HEAD_STYLING": " style='{0} padding: 2px; border: 1px solid black;' ",
+            "TABLE_STYLING": " style='font-size: 85%; width: 100%; border-collapse: collapse; border: 1px solid black;' "
         },
         "less ugly - minimal width": {
-            "BODY_STYLING": " style='{0} padding:2px;' ",
-            "HEAD_STYLING": " style='{0} padding:2px;' ",
-            "TABLE_STYLING": " style='font-size: 85%; border-collapse: collapse;' border='1' "
+            "BODY_STYLING": " style='{0} padding:2px; border: 1px solid black;' ",
+            "HEAD_STYLING": " style='{0} padding:2px; border: 1px solid black;' ",
+            "TABLE_STYLING": " style='font-size: 85%; border-collapse: collapse; border: 1px solid black;' "
         },
         "no outside border": {
             "BODY_STYLING": " style='{0} padding: 2px; border: 1px solid #999999' ",

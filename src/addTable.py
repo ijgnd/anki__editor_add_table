@@ -20,6 +20,7 @@ from anki.hooks import addHook, wrap
 from aqt import mw
 from aqt.qt import *
 from aqt.editor import Editor
+from aqt.utils import tooltip
 
 from .forms import addtable
 
@@ -59,8 +60,6 @@ def wcm(list_):
             config[key] = newvalue
     mw.addonManager.writeConfig(__name__, config)
     return success
-
-
 
 
 def get_alignment(s):
@@ -139,9 +138,10 @@ class TableDialog(QDialog):
         d.cb_width.setChecked(True if gc("table_style__column_width_fixed_default", False) else False)
         d.cb_first.setChecked(True if gc("table_style__first_row_is_head_default", False) else False)
         d.cb_prefill.setChecked(True if gc("table_pre-populate_head_fields", False) else False)
+        d.cb_center.setChecked(True if gc("table_center_by_default", False) else False)
 
         smembers = [gc('table_style__default'), ]
-        for s in gc('table_style_css_V2').keys():
+        for s in gc('table_style_css_V3').keys():
             if s != gc('table_style__default'):
                 smembers.append(s)
         d.sb_styling.addItems(smembers)
@@ -169,6 +169,7 @@ class TableDialog(QDialog):
                  ["table_style__first_row_is_head_default", self.usehead],
                  ["table_pre-populate_head_fields", self.prefill],
                  ["table_pre-populate_body_fields", self.prefill],
+                 ["table_center_by_default", self.center],
                  ["table_style__default", self.styling],
                  ["table_style__h_align_default", self.table_h_align],
                  ["table_style__v_align_default", self.table_v_align],
@@ -183,6 +184,7 @@ class TableDialog(QDialog):
         self.fixedwidth = True if d.cb_width.isChecked() else False
         self.usehead = True if d.cb_first.isChecked() else False
         self.prefill = True if d.cb_prefill.isChecked() else False
+        self.center = True if d.cb_center.isChecked() else False
         self.styling = d.sb_styling.currentText()
         self.table_h_align = d.sb_align_H.currentText()
         if self.table_h_align == "do not override global settings":
@@ -207,9 +209,11 @@ class Table():
         if self.selected_text:
             # if no suitable selected text, present user with dialog
             if not self.selected_text.count("\n"):  # there is a single line of text
-                self.show_dialog()
-            if all(c in ("|", "\n") for c in self.selected_text):  # there is no content in table
-                self.show_dialog()
+                tooltip("Select more than one line to create a table. Aborting ...")
+                return
+            elif all(c in ("|", "\n") for c in self.selected_text):  # there is no content in table
+                tooltip("No content for table. Aborting ...")
+                return
             else:
                 self.create_table_from_selection()
         else:
@@ -222,9 +226,17 @@ class Table():
                 num_rows = d.num_rows - 1
             else:
                 num_rows = d.num_rows
-            Tstyle = gc('table_style_css_V2')[d.styling]['TABLE_STYLING']
-            Hstyle = gc('table_style_css_V2')[d.styling]['HEAD_STYLING']
-            Bstyle = gc('table_style_css_V2')[d.styling]['BODY_STYLING']
+            Tstyle = gc('table_style_css_V3')[d.styling]['TABLE_STYLING']
+            Hstyle = gc('table_style_css_V3')[d.styling]['HEAD_STYLING']
+            Bstyle = gc('table_style_css_V3')[d.styling]['BODY_STYLING']
+
+            if d.center:
+                if "style='" in Tstyle:
+                    Tstyle = Tstyle.replace("style='", "style='margin-left:auto; margin-right:auto; ")
+                elif "style=\"" in Tstyle:
+                    Tstyle = Tstyle.replace("style=\"", "style=\"margin-left:auto; margin-right:auto; ")
+                else:
+                    Tstyle += " style='margin-left:auto; margin-right:auto;' "
 
             style = ""
             if d.fixedwidth:
@@ -289,6 +301,10 @@ class Table():
             new_elem = [escape_html_chars(word) for word in new_elem]
             second.append(new_elem)
 
+        if len(second) < 2:
+            tooltip("Add-on 'Add Table': Something went wrong. Aborting ...")
+            return
+
         # keep track of the max number of cols
         # so as to make all rows of equal length
         max_num_cols = len(max(second, key=len))
@@ -313,9 +329,9 @@ class Table():
 
         # create a table
         styling = gc("table_style__default")
-        Tstyle = gc('table_style_css_V2')[styling]['TABLE_STYLING']
-        Hstyle = gc('table_style_css_V2')[styling]['HEAD_STYLING']
-        Bstyle = gc('table_style_css_V2')[styling]['BODY_STYLING']
+        Tstyle = gc('table_style_css_V3')[styling]['TABLE_STYLING']
+        Hstyle = gc('table_style_css_V3')[styling]['HEAD_STYLING']
+        Bstyle = gc('table_style_css_V3')[styling]['BODY_STYLING']
 
         head_row = ""
         head_html = "<th {0}>{1}</th>"
