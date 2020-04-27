@@ -1,11 +1,25 @@
-# Addon for Anki 2.1 that inserts tables
-# Copyright: 2018- ijgnd
-#            2014-2017 Stefan van den Akker <neftas@protonmail.com>
-# Licensed under the GNU AGPLv3.
+"""
+Addon for Anki 2.1 that inserts tables
+this is a modification and extension of the table function from neftas' Power Format Pack
 
-# this is a modification and extension of the table function from neftas' Power Format Pack
-# the styling "less ugly" is from the add-on add "tables with less ugly tables",
-# https://ankiweb.net/shared/info/1467671504, Copyright 2018 anonymous
+
+Copyright: 2018- ijgnd
+           2014-2017 Stefan van den Akker <neftas@protonmail.com>
+
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>
+"""
 
 
 import json
@@ -64,6 +78,63 @@ def wcm(list_):
             config[key] = newvalue
     mw.addonManager.writeConfig(__name__, config)
     return success
+
+
+# check and maybe transform config.json: old V3 to tableaddon_configlevel_2020-04-27
+def maybe_adjust_config():
+    conf = mw.addonManager.getConfig(__name__)
+    if not conf:
+        return
+    if conf.get("tableaddon_configlevel_2020-04-27", None):
+        return
+    if not "table_style_css_V3" in conf:
+        return
+    styling = conf.get("table_style_css_V3")
+    originalstyling = styling.copy()
+    if not isinstance(styling, dict):
+        return
+    newnames = {
+        "less ugly - full width": "basic - full width",
+        "less ugly - minimal width": "basic - minimal width",       
+    }
+    for name in list(styling):
+        if name in newnames:
+            styling[newnames.get(name)] = styling.pop(name)            
+    newvalues = {
+        "basic - full width": {
+            "old": " style='font-size: 85%; width: 100%; border-collapse: collapse; border: 1px solid black;' ",
+            "new": " class='table_class_basic_full_width' style='font-size: 85%; width: 100%; border-collapse: collapse; border: 1px solid black;' "
+        },
+        "basic - minimal width": {
+            "old": " style='font-size: 85%; border-collapse: collapse; border: 1px solid black;' ",
+            "new": " class='table_class_basic_minimal_width' style='font-size: 85%; border-collapse: collapse; border: 1px solid black;' "
+        },
+        "no outside border": {
+            "old": " style='font-size: 85%; width: 100%; border-style: hidden; border-collapse: collapse;' ",
+            "new": " class='table_class_no_outside_border' style='font-size: 85%; width: 100%; border-style: hidden; border-collapse: collapse;' "
+        },
+        "pfp - style": {
+            "old": " style='font-size: 95%; width: 100%; border-collapse: collapse;' ",
+            "new": " class='table_class_pfp_style' style='font-size: 95%; width: 100%; border-collapse: collapse;' "
+        }
+    }
+    for key in list(styling):
+        if key in newvalues:
+            vals = styling.get(key, None)
+            if vals and isinstance(vals, dict) and "TABLE_STYLING" in vals:
+                if vals["TABLE_STYLING"] == newvalues[key]["old"]:
+                    styling[key]["TABLE_STYLING"] = newvalues[key]["new"]
+
+    default = conf.get("table_style__default", None)
+    if default:
+        for old, new in newnames.items():
+            if default == old:
+                conf["table_style__default"] = new
+
+    conf["tableaddon_configlevel_2020-04-27"] = True
+    print('add-on Add Table config checked')
+    mw.addonManager.writeConfig(__name__, conf)
+addHook('profileLoaded', maybe_adjust_config)
 
 
 def get_alignment(s):
