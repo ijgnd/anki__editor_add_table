@@ -75,6 +75,25 @@ QLabel    { padding-top: 7%; }
 """  # height: 10px; margin: 0px; }"
 
 
+class TableBase():
+    def insert_table(self, Tstyle, head_row, body_rows):
+        if head_row:
+            html = """
+            <table {0}>
+                <thead><tr>{1}</tr></thead>
+                <tbody>{2}</tbody>
+            </table>""".format(Tstyle, head_row, body_rows)
+        else:
+            html = """
+            <table {0}>
+                <tbody>{1}</tbody>
+            </table>""".format(Tstyle, body_rows)
+
+        self.editor.web.eval(
+                "document.execCommand('insertHTML', false, %s);"
+                % json.dumps(html))
+
+
 class TableDialog(QDialog):
     def __init__(self, parent):
         self.parent = parent
@@ -153,25 +172,6 @@ class TableDialog(QDialog):
         self.save_as_default = d.cb_save.isChecked()
         self.update_config()
         QDialog.accept(self)
-
-
-class TableBase():
-    def insert_table(self, Tstyle, head_row, body_rows):
-        if head_row:
-            html = """
-            <table {0}>
-                <thead><tr>{1}</tr></thead>
-                <tbody>{2}</tbody>
-            </table>""".format(Tstyle, head_row, body_rows)
-        else:
-            html = """
-            <table {0}>
-                <tbody>{1}</tbody>
-            </table>""".format(Tstyle, body_rows)
-
-        self.editor.web.eval(
-                "document.execCommand('insertHTML', false, %s);"
-                % json.dumps(html))
 
 
 class TableFromDialog(TableBase):
