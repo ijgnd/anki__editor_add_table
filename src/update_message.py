@@ -22,7 +22,7 @@ def maybe_show_update_message_for_2020_07_24():
         return
     if not os.path.isdir(user_files):
         os.makedirs(user_files)
-        open(fa, 'a').close()
+    open(fa, 'a').close()
     wcs("tableaddon_configlevel_2020-07-24", True, True)  # for future compatibility also store this.
     if gc("table_style_css_V3") == default_v3_from_april_2020:
         # the user didn't change the config, so no reason to bother:
