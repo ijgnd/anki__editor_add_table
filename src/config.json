@@ -25,18 +25,18 @@
             "TABLE_STYLING": " class='table_class_two' "
         },
         "basic - full width": {
-            "BODY_STYLING": " style='{0} padding: 2px; border: 1px solid black;' ",
-            "HEAD_STYLING": " style='{0} padding: 2px; border: 1px solid black;' ",
-            "TABLE_STYLING": " class='table_class_basic_full_width' style='font-size: 85%; width: 100%; border-collapse: collapse; border: 1px solid black;' "
+            "BODY_STYLING": " style='{0} padding: 2px; border: 1px solid;' ",
+            "HEAD_STYLING": " style='{0} padding: 2px; border: 1px solid;' ",
+            "TABLE_STYLING": " class='table_class_basic_full_width' style='font-size: 85%; width: 100%; border-collapse: collapse; border: 1px solid;' "
         },
         "basic - minimal width": {
-            "BODY_STYLING": " style='{0} padding:2px; border: 1px solid black;' ",
-            "HEAD_STYLING": " style='{0} padding:2px; border: 1px solid black;' ",
-            "TABLE_STYLING": " class='table_class_basic_minimal_width' style='font-size: 85%; border-collapse: collapse; border: 1px solid black;' "
+            "BODY_STYLING": " style='{0} padding:2px; border: 1px solid;' ",
+            "HEAD_STYLING": " style='{0} padding:2px; border: 1px solid;' ",
+            "TABLE_STYLING": " class='table_class_basic_minimal_width' style='font-size: 85%; border-collapse: collapse; border: 1px solid;' "
         },
         "no outside border": {
-            "BODY_STYLING": " style='{0} padding: 2px; border: 1px solid #999999' ",
-            "HEAD_STYLING": " style='{0} padding: 2px; border: 1px solid #999999' ",
+            "BODY_STYLING": " style='{0} padding: 2px; border: 1px solid' ",
+            "HEAD_STYLING": " style='{0} padding: 2px; border: 1px solid' ",
             "TABLE_STYLING": " class='table_class_no_outside_border' style='font-size: 85%; width: 100%; border-style: hidden; border-collapse: collapse;' "
         },
         "pfp - style": {

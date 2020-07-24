@@ -103,11 +103,11 @@ def maybe_adjust_config():
     newvalues = {
         "basic - full width": {
             "old": " style='font-size: 85%; width: 100%; border-collapse: collapse; border: 1px solid black;' ",
-            "new": " class='table_class_basic_full_width' style='font-size: 85%; width: 100%; border-collapse: collapse; border: 1px solid black;' "
+            "new": " class='table_class_basic_full_width' style='font-size: 85%; width: 100%; border-collapse: collapse; border: 1px solid;' "
         },
         "basic - minimal width": {
             "old": " style='font-size: 85%; border-collapse: collapse; border: 1px solid black;' ",
-            "new": " class='table_class_basic_minimal_width' style='font-size: 85%; border-collapse: collapse; border: 1px solid black;' "
+            "new": " class='table_class_basic_minimal_width' style='font-size: 85%; border-collapse: collapse; border: 1px solid;' "
         },
         "no outside border": {
             "old": " style='font-size: 85%; width: 100%; border-style: hidden; border-collapse: collapse;' ",
@@ -132,7 +132,6 @@ def maybe_adjust_config():
                 conf["table_style__default"] = new
 
     conf["tableaddon_configlevel_2020-04-27"] = True
-    print('add-on Add Table config checked')
     mw.addonManager.writeConfig(__name__, conf)
 addHook('profileLoaded', maybe_adjust_config)
 
