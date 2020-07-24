@@ -1,4 +1,5 @@
-import mw
+from aqt import mw
+
 
 def gc(arg, fail=False):
     conf = mw.addonManager.getConfig(__name__)
