@@ -23,3 +23,4 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>
 
 from . import addTable
 from . import update_config
+from . import install_time_log
