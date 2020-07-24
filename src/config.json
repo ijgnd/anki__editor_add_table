@@ -13,7 +13,7 @@
     "table_style__column_width_fixed_default": true,
     "table_style__default": "basic - full width",
     "table_style__first_row_is_head_default": true,
-    "table_style_css_V3": {
+    "table_style_css_V4": {
         "css1": {
             "BODY_STYLING": "",
             "HEAD_STYLING": "",

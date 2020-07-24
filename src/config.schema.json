@@ -73,7 +73,7 @@
         "default": true,
         "description": ""
         },
-    "table_style_css_V3": {
+    "table_style_css_V4": {
         "type": "object",
         "description": "",
         "additionalProperties": { 

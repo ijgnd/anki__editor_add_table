@@ -118,7 +118,7 @@ class TableDialog(QDialog):
         d.cb_center.setChecked(True if gc("table_center_by_default", False) else False)
 
         smembers = [gc('table_style__default'), ]
-        for s in gc('table_style_css_V3').keys():
+        for s in gc('table_style_css_V4').keys():
             if s != gc('table_style__default'):
                 smembers.append(s)
         d.sb_styling.addItems(smembers)
@@ -187,9 +187,9 @@ class TableFromDialog(TableBase):
                 num_rows = d.num_rows - 1
             else:
                 num_rows = d.num_rows
-            Tstyle = gc('table_style_css_V3')[d.styling]['TABLE_STYLING']
-            Hstyle = gc('table_style_css_V3')[d.styling]['HEAD_STYLING']
-            Bstyle = gc('table_style_css_V3')[d.styling]['BODY_STYLING']
+            Tstyle = gc('table_style_css_V4')[d.styling]['TABLE_STYLING']
+            Hstyle = gc('table_style_css_V4')[d.styling]['HEAD_STYLING']
+            Bstyle = gc('table_style_css_V4')[d.styling]['BODY_STYLING']
 
             if d.center:
                 if "style='" in Tstyle:
@@ -281,9 +281,9 @@ class TableFromMarkdownLike(TableBase):
 
         # create a table
         styling = gc("table_style__default")
-        Tstyle = gc('table_style_css_V3')[styling]['TABLE_STYLING']
-        Hstyle = gc('table_style_css_V3')[styling]['HEAD_STYLING']
-        Bstyle = gc('table_style_css_V3')[styling]['BODY_STYLING']
+        Tstyle = gc('table_style_css_V4')[styling]['TABLE_STYLING']
+        Hstyle = gc('table_style_css_V4')[styling]['HEAD_STYLING']
+        Bstyle = gc('table_style_css_V4')[styling]['BODY_STYLING']
 
         head_row = ""
         head_html = "<th {0}>{1}</th>"
