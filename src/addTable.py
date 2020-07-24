@@ -36,18 +36,11 @@ from aqt.qt import *
 from aqt.editor import Editor
 from aqt.utils import tooltip
 
+from .config import gc
 from .forms import addtable
 
 
 addon_path = os.path.dirname(__file__)
-
-
-def gc(arg, fail=False):
-    conf = mw.addonManager.getConfig(__name__)
-    if conf:
-        return conf.get(arg, fail)
-    else:
-        return fail
 
 
 def wcs(key, newvalue, addnew=False):
