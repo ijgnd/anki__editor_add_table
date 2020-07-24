@@ -131,6 +131,7 @@ default_v3_from_july_2020 = {
     }
 
 
+
 def maybe_adjust_config():
     conf = mw.addonManager.getConfig(__name__)
     if not conf:
@@ -146,3 +147,12 @@ def maybe_adjust_config():
             wcm([["table_style_css_V3", default_v3_from_july_2020]])
 # DONT AUTOUPDATE ANYMORE. NOT WORTH THE TIME TO MAKE SURE ITS RISKFREE.
 # addHook('profileLoaded', maybe_adjust_config)
+
+
+def minimal_adjust_config():
+    default = gc("table_style__default")
+    if default:
+        legalnames = [key for key in gc("table_style_css_V4").keys()]
+        if default not in legalnames:
+            wcs("table_style__default", "basic - full width", True)
+addHook('profileLoaded', minimal_adjust_config)
