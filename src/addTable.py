@@ -155,27 +155,30 @@ class TableDialog(QDialog):
         QDialog.accept(self)
 
 
-class Table():
-    def __init__(self, editor, parent_window, selected_text):
-        """
-        note: ignore the DRY principle and don't try to merge the part from
-        show_dialog and create_table_from_selection that creates the styling.
-        """
+class TableBase():
+    def insert_table(self, Tstyle, head_row, body_rows):
+        if head_row:
+            html = """
+            <table {0}>
+                <thead><tr>{1}</tr></thead>
+                <tbody>{2}</tbody>
+            </table>""".format(Tstyle, head_row, body_rows)
+        else:
+            html = """
+            <table {0}>
+                <tbody>{1}</tbody>
+            </table>""".format(Tstyle, body_rows)
+
+        self.editor.web.eval(
+                "document.execCommand('insertHTML', false, %s);"
+                % json.dumps(html))
+
+
+class TableFromDialog(TableBase):
+    def __init__(self, editor, parent_window):
         self.editor = editor
         self.parent_window = parent_window
-        self.selected_text = selected_text
-        if self.selected_text:
-            # if no suitable selected text, present user with dialog
-            if not self.selected_text.count("\n"):  # there is a single line of text
-                tooltip("Select more than one line to create a table. Aborting ...")
-                return
-            elif all(c in ("|", "\n") for c in self.selected_text):  # there is no content in table
-                tooltip("No content for table. Aborting ...")
-                return
-            else:
-                self.create_table_from_selection()
-        else:
-            self.show_dialog()
+        self.show_dialog()
 
     def show_dialog(self):
         d = TableDialog(self.parent_window)
@@ -223,22 +226,13 @@ class Table():
             body_rows = "<tr>{}</tr>".format(body_column) * num_rows
             self.insert_table(Tstyle, head_row, body_rows)
 
-    def insert_table(self, Tstyle, head_row, body_rows):
-        if head_row:
-            html = """
-            <table {0}>
-                <thead><tr>{1}</tr></thead>
-                <tbody>{2}</tbody>
-            </table>""".format(Tstyle, head_row, body_rows)
-        else:
-            html = """
-            <table {0}>
-                <tbody>{1}</tbody>
-            </table>""".format(Tstyle, body_rows)
 
-        self.editor.web.eval(
-                "document.execCommand('insertHTML', false, %s);"
-                % json.dumps(html))
+class TableFromMarkdownLike(TableBase):
+    def __init__(self, editor, parent_window, selected_text):
+        self.editor = editor
+        self.parent_window = parent_window
+        self.selected_text = selected_text
+        self.create_table_from_selection()
 
     def create_table_from_selection(self):
         # - split on newlines
@@ -330,7 +324,15 @@ class Table():
 
 def toggle_table(editor):
     selection = editor.web.selectedText()
-    Table(editor, editor.parentWindow, selection if selection else None)
+    if not selection:
+        TableFromDialog(editor, editor.parentWindow)
+    else:
+        if not selection.count("\n"):  # there is a single line of text
+            tooltip("Select more than one line to create a table. Aborting ...")
+        elif all(c in ("|", "\n") for c in selection):  # there is no content in table
+            tooltip("No content for table. Aborting ...")
+        else:
+            TableFromMarkdownLike(editor, editor.parentWindow, selection)
 Editor.toggle_table = toggle_table
 
 
