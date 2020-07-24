@@ -12,7 +12,7 @@ from aqt.qt import *
 from aqt.editor import Editor
 from aqt.utils import tooltip
 
-from .config import gc, wcs, wcm
+from .config import gc, wcm
 from .forms import addtable
 
 
