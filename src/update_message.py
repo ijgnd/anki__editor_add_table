@@ -33,12 +33,15 @@ This is a one-time message from the add-on "<b>{addonname}</b>".
 It's shown one time because you just installed it or just upgraded. If you installed this 
 add-on for the first time this message is not relevant for you.
 <br><br>
-The rest of this message talks about the configuration of the add-on "{addonname}". You can 
-see the config for an add-on like this: In the main window menu bar click on "Tools", then on
-"Add-ons". In the window that opens select the add-on "{addonname}" and then click the button
-"Config" in the lower right of this add-on. 
+The rest of this message talks about the configuration of the add-on "{addonname}". If like most
+people you never changed the config or only changed the shortcut to insert the table the rest
+of the message is not relevant for you.
 <br><br>
-If you ever changed the config settings named "table_style_css", "table_style_css_V2" or 
+You can see the config for an add-on like this: In the main window menu bar click on "Tools", then on
+"Add-ons". In the window that opens select the add-on "{addonname}" and then click the button
+"Config" in the lower right of this add-on.
+<br><br>
+If you ever changed config settings named "table_style_css", "table_style_css_V2" or 
 "table_style_css_V3" check the 
 <a href="https://ankiweb.net/shared/info/1237621971" rel="nofollow">description on ankiweb</a>
 in the section "Update notice".
