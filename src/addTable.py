@@ -265,19 +265,23 @@ class TableFromMarkdownLike(TableBase):
         width = 100 / max_num_cols
 
         # check for "-|-|-" alignment row
+        if gc("md: format selection text, no head"):
+            second[0] = [re.sub(r"-+", '-', x) for x in second[0]]
+            align_line = second[0]
+        else:
         second[1] = [re.sub(r"-+", '-', x) for x in second[1]]
-        if all(x.strip(":") in ("-", "") for x in second[1]):
-            start = 2
             align_line = second[1]
+        if all(x.strip(":") in ("-", "") for x in align_line):
+            start = 1 if gc("md: format selection text, no head") else 2 
             len_align_line = len(align_line)
             if len_align_line < max_num_cols:
                 align_line += ["-"] * (max_num_cols - len_align_line)
             alignments = list()
-            for elem in second[1]:
+            for elem in align_line:
                 alignments.append(get_alignment(elem))
         else:
             alignments = ["left"] * max_num_cols
-            start = 1
+            start = 0 if gc("md: format selection text, no head") else 1
 
         # create a table
         styling = gc("table_style__default")
@@ -286,6 +290,7 @@ class TableFromMarkdownLike(TableBase):
         Bstyle = gc('table_style_css_V4')[styling]['BODY_STYLING']
 
         head_row = ""
+        if not gc("md: format selection text, no head"):
         head_html = "<th {0}>{1}</th>"
         for elem, alignment in zip(second[0], alignments):
             style = "width:{0:.0f}%; text-align:{1};".format(width, alignment)
