@@ -6,6 +6,7 @@
     "Table_max_rows": 100,
     "last_used_overrides_default": true,
     "md: format selection text, default to head": true,
+    "md: format selection with markdown package": false,
     "table_center_by_default": false,
     "table_pre-populate_head_fields": true,
     "table_pre-populate_body_fields": true,

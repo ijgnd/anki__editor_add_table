@@ -19,6 +19,15 @@ from .forms import addtable
 addon_path = os.path.dirname(__file__)
 
 
+import markdown
+from markdown.extensions.abbr import AbbrExtension
+from markdown.extensions.codehilite import CodeHiliteExtension
+from markdown.extensions.def_list import DefListExtension
+from markdown.extensions.fenced_code import FencedCodeExtension
+from markdown.extensions.footnotes import FootnoteExtension
+from markdown.extensions.tables import TableExtension
+
+
 
 def get_alignment(s):
     """
@@ -41,7 +50,7 @@ def get_alignment(s):
 
 
 place_holder_table = {
-    # "strings in source" : ["strings in result", "temporary placeholder"]
+    # "strings in source" : TableExtension["strings in result", "temporary placeholder"]
     "\|": ["&#124;", str(uuid.uuid4())],
 }
 
@@ -240,6 +249,38 @@ class TableFromMarkdownLike(TableBase):
         #   markdown tables might not work and a space might generate a new column
         # - To include a pipe as content escape the backslash (as in GFM spec)
         stx = self.selected_text
+
+        if False  # gc("md: format selection with markdown package"):
+            # seems to be working
+            # html = markdown.markdown(stx, extensions=[
+            #     AbbrExtension(),
+            #     # CodeHiliteExtension(
+            #     #     noclasses = True, 
+            #     #     linenums = config.shouldShowCodeLineNums(), 
+            #     #     pygments_style = config.getCodeColorScheme()
+            #     # ),
+            #     DefListExtension(),
+            #     FencedCodeExtension(),
+            #     FootnoteExtension(),
+            #     TableExtension(),
+            #     ], output_format="html5")
+
+            # seems to be working
+            html = markdown.markdown(stx, extensions=[
+                    AbbrExtension(),
+                    TableExtension(),
+                ], output_format="html5")
+
+            # not working: table extension not found
+            # html = markdown.markdown(stx, extensions=["tables"], output_format="html5")
+
+            # print(html)
+            self.editor.web.eval(
+                    "document.execCommand('insertHTML', false, %s);"
+                    % json.dumps(html))
+            return
+
+
         for k, v in place_holder_table.items():
             stx = stx.replace(k, v[1])
         first = [x.strip() for x in stx.split("\n") if x]
@@ -304,19 +345,19 @@ class TableFromMarkdownLike(TableBase):
 
         head_row = ""
         if use_header:
-        head_html = "<th {0}>{1}</th>"
+            head_html = "<th {0}>{1}</th>"
             for elem, alignment in zip(use_header, alignments):
-            style = "width:{0:.0f}%; text-align:{1};".format(width, alignment)
-            head_row += head_html.format(Hstyle.format(style), elem)
-        extra_cols = ""
+                style = "width:{0:.0f}%; text-align:{1};".format(width, alignment)
+                head_row += head_html.format(Hstyle.format(style), elem)
+            extra_cols = ""
             if len(use_header) < max_num_cols:
                 diff = len(use_header) - max_num_cols
-            assert diff < 0, \
+                assert diff < 0, \
                     "Difference between len(use_header) and max_num_cols is positive"
-            for alignment in alignments[diff:]:
-                style = "width:{0:.0f}%; text-align:{1};".format(width, alignment)
-                extra_cols += head_html.format(Hstyle.format(style), "")
-        head_row += extra_cols
+                for alignment in alignments[diff:]:
+                    style = "width:{0:.0f}%; text-align:{1};".format(width, alignment)
+                    extra_cols += head_html.format(Hstyle.format(style), "")
+            head_row += extra_cols
 
         body_rows = ""
         for row in second[start:]:
