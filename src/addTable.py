@@ -19,22 +19,6 @@ from .forms import addtable
 addon_path = os.path.dirname(__file__)
 
 
-"""
-# https://pypi.org/project/Markdown
-# https://github.com/Python-Markdown/markdown
-# https://docs.python.org/3/library/importlib.html#importing-a-source-file-directly
-# via
-# https://forums.ankiweb.net/t/best-practice-for-add-ons-using-third-party-packages/1585
-import sys
-import pathlib
-import importlib.util
-addon_root = pathlib.Path(__file__).resolve().parent
-md_source = addon_root / 'libs' / 'markdown' / '__init__.py'
-spec = importlib.util.spec_from_file_location('markdown', md_source)
-module = importlib.util.module_from_spec(spec)
-sys.modules['markdown'] = module
-spec.loader.exec_module(module)
-"""
 import markdown
 from markdown.extensions.abbr import AbbrExtension
 from markdown.extensions.codehilite import CodeHiliteExtension
