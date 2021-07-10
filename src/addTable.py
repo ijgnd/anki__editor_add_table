@@ -265,7 +265,7 @@ class TableFromMarkdownLike(TableBase):
             html = markdown.markdown(stx, extensions=[
                     AbbrExtension(),
                     TableExtension(),
-                ], output_format="html5")
+                ], output_format="html")
 
             # not working: table extension not found
             # html = markdown.markdown(stx, extensions=["tables"], output_format="html5")
