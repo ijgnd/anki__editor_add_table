@@ -93,7 +93,7 @@ class TableBase:
                 <tbody>{1}</tbody>
             </table>""".format(tstyle, body_rows)
 
-        self.editor.web.eval(
+        self.editor.web.eval(  # noqa
                 "document.execCommand('insertHTML', false, %s);"
                 % json.dumps(html))
 
@@ -246,6 +246,7 @@ class TableFromMarkdownLike(TableBase):
         stx = self.selected_text
 
         if False:  # gc("md: format selection with markdown package"):
+            # noqa
             # seems to be working
             # html = markdown.markdown(stx, extensions=[
             #     AbbrExtension(),
@@ -311,6 +312,10 @@ class TableFromMarkdownLike(TableBase):
         if all([one, two]):
             tooltip("Error. The top two rows seem to be alignment rows.")
             return
+
+        align_line = []
+        alignments = []
+
         if one:
             use_header = False
             align_line = second[0]
@@ -323,12 +328,11 @@ class TableFromMarkdownLike(TableBase):
             use_header = second[0] if gc("md: format selection text, default to head") else False
             alignments = ["left"] * max_num_cols
             start = 1 if gc("md: format selection text, default to head") else 0
-        
+
         if one or two:
-            len_align_line = len(align_line)
+            len_align_line = len(align_line)  # noqa
             if len_align_line < max_num_cols:
                 align_line += ["-"] * (max_num_cols - len_align_line)
-            alignments = list()
             for elem in align_line:
                 alignments.append(get_alignment(elem))
 
