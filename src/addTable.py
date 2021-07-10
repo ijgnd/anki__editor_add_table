@@ -392,7 +392,6 @@ def toggle_table(editor):
             tooltip("No content for table. Aborting ...")
         else:
             TableFromMarkdownLike(editor, editor.parentWindow, selection)
-Editor.toggle_table = toggle_table
 
 
 def setupEditorButtonsFilter(buttons, editor):
