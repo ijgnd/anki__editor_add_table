@@ -1,30 +1,25 @@
 import json
-import os
 import re
-from pprint import pprint as pp
+from pprint import pprint as pp  # noqa
 import uuid
 
 
-from anki import version
-from anki.hooks import addHook, wrap
-from aqt import mw
+from anki.hooks import addHook
 from aqt.qt import *
-from aqt.editor import Editor
 from aqt.utils import tooltip
 
 from .config import gc, wcm
-from .forms import addtable
+from .forms import addtable  # noqa
 
 
 addon_path = os.path.dirname(__file__)
 
-
 import markdown
 from markdown.extensions.abbr import AbbrExtension
-from markdown.extensions.codehilite import CodeHiliteExtension
-from markdown.extensions.def_list import DefListExtension
-from markdown.extensions.fenced_code import FencedCodeExtension
-from markdown.extensions.footnotes import FootnoteExtension
+from markdown.extensions.codehilite import CodeHiliteExtension  # noqa
+from markdown.extensions.def_list import DefListExtension  # noqa
+from markdown.extensions.fenced_code import FencedCodeExtension  # noqa
+from markdown.extensions.footnotes import FootnoteExtension  # noqa
 from markdown.extensions.tables import TableExtension
 
 
