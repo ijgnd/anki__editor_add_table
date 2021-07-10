@@ -250,7 +250,7 @@ class TableFromMarkdownLike(TableBase):
         # - To include a pipe as content escape the backslash (as in GFM spec)
         stx = self.selected_text
 
-        if False  # gc("md: format selection with markdown package"):
+        if False:  # gc("md: format selection with markdown package"):
             # seems to be working
             # html = markdown.markdown(stx, extensions=[
             #     AbbrExtension(),
