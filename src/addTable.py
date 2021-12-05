@@ -10,7 +10,10 @@ from aqt.qt import *
 from aqt.utils import tooltip
 
 from .config import gc, wcm
-from .forms import addtable  # noqa
+if qtmajor == 5:
+    from .forms5 import addtable  # type: ignore  # noqa
+else:
+    from .forms6 import addtable  # type: ignore  # noqa
 
 
 addon_path = os.path.dirname(__file__)
@@ -102,7 +105,7 @@ class TableBase:
 class TableDialog(QDialog):
     def __init__(self, parent):
         self.parent = parent
-        QDialog.__init__(self, parent, Qt.Window)
+        QDialog.__init__(self, parent, Qt.WindowType.Window)
         self.dialog = addtable.Ui_Dialog()
         self.dialog.setupUi(self)
         self.setWindowTitle("Add Table ")
@@ -396,7 +399,7 @@ def toggle_table(editor):
 
 def setupEditorButtonsFilter(buttons, editor):
     key = QKeySequence(gc('Key_insert_table'))
-    keyStr = key.toString(QKeySequence.NativeText)
+    keyStr = key.toString(QKeySequence.SequenceFormat.NativeText)
     if gc('Key_insert_table'):
         b = editor.addButton(
             os.path.join(addon_path, "icons", "table.png"),
