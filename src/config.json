@@ -17,13 +17,13 @@
     "table_style__first_row_is_head_default": true,
     "table_style_css_V4": {
         "css1": {
-            "BODY_STYLING": "",
-            "HEAD_STYLING": "",
+            "BODY_STYLING": " style='{0}'",
+            "HEAD_STYLING": " style='{0}'",
             "TABLE_STYLING": " class='table_class_one' "
         },
         "css2": {
-            "BODY_STYLING": "",
-            "HEAD_STYLING": "",
+            "BODY_STYLING": " style='{0}'",
+            "HEAD_STYLING": " style='{0}'",
             "TABLE_STYLING": " class='table_class_two' "
         },
         "basic - full width": {
@@ -47,8 +47,8 @@
             "TABLE_STYLING": " class='table_class_pfp_style' style='font-size: 95%; width: 100%; border-collapse: collapse;' "
         },
         "unstyled": {
-            "BODY_STYLING": "",
-            "HEAD_STYLING": "",
+            "BODY_STYLING": "style='{0}'",
+            "HEAD_STYLING": "style='{0}'",
             "TABLE_STYLING": ""
         }
     }
