@@ -43,6 +43,7 @@ def get_alignment(s):
     """
     alignments = {":-": "left", ":-:": "center", "-:": "right"}
     default = "left"
+    s = re.sub("\\-{2,}","-",s) #Prune extra dashes.
     if s not in alignments:
         return default
     return alignments[s]
