@@ -7,7 +7,7 @@ import uuid
 
 from anki.hooks import addHook
 from aqt.qt import *
-from aqt.utils import tooltip
+from aqt.utils import tooltip, restoreGeom, saveGeom
 
 from .config import gc, wcm
 if qtmajor == 5:
@@ -112,6 +112,7 @@ class TableDialog(QDialog):
         self.setWindowTitle("Add Table ")
         self.setStyleSheet(stylesheet)
         self.fill()
+        restoreGeom(self, "addon_add_table_dialog")
 
     def fill(self):
         d = self.dialog
@@ -180,6 +181,7 @@ class TableDialog(QDialog):
             self.table_v_align = ""
         self.save_as_default = d.cb_save.isChecked()
         self.update_config()
+        saveGeom(self, "addon_add_table_dialog")
         QDialog.accept(self)
 
 
