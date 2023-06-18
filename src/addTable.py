@@ -9,6 +9,7 @@ from anki.hooks import addHook
 from aqt.qt import *
 from aqt.utils import tooltip, restoreGeom, saveGeom
 
+from .anki_version_detection import anki_point_version
 from .config import gc, wcm
 if qtmajor == 5:
     from .forms5 import addtable  # type: ignore  # noqa
@@ -78,6 +79,17 @@ def escape_html_chars(s):
     return result
 
 
+def insert_html_into_editor_at_cursor(editor, html):
+    if anki_point_version <= 49:
+        js = "document.execCommand('insertHTML', false, %s);" % json.dumps(html)                
+    else:
+        js = """
+setTimeout(function() {
+document.execCommand('insertHTML', false, %s);
+}, 40); """ % json.dumps(html)
+    editor.web.eval(js)        
+
+
 stylesheet = """
 QCheckBox { padding-top: 7%; }
 QLabel    { padding-top: 7%; }
@@ -97,10 +109,7 @@ class TableBase:
             <table {0}>
                 <tbody>{1}</tbody>
             </table>""".format(tstyle, body_rows)
-
-        self.editor.web.eval(  # noqa
-                "document.execCommand('insertHTML', false, %s);"
-                % json.dumps(html))
+        insert_html_into_editor_at_cursor(self.editor, html)
 
 
 class TableDialog(QDialog):
